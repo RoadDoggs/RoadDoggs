@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #eae7dc;
+  --color-ink: #232323;
+  --color-rust: #c8553d;
+  --color-sage: #8e9c6d;
+  --color-sand: #d8c3a5;
+  --color-tape: rgba(255, 255, 255, 0.4);
+  --color-alert: #bc4b51;
+
+  --font-serif: "Fraunces";
+  --font-mono: "Space Mono";
+  --font-hand: "Reenie Beanie";
+
+  --animate-drift: drift 15s ease-in-out infinite;
+  --animate-scribble: scribble 0.5s steps(10) forwards;
+
+  --shadow-rough-hover: 2px 2px 0px 0px #232323;
+  --shadow-rough: 4px 4px 0px 0px #232323;
+  --shadow-paper-floating: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(1deg);
+    }
+  }
+}
+
+button,
+.btn {
+  cursor: pointer;
+}
+
+@import "./assets/css/landing.css";
+
+.backgroundImage-noise {
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+.backgroundImage-paper {
+  background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+}
+
+.backgroundImage-tape {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='9' viewBox='0 0 200 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.00025 6.99997C2.00025 6.99997 23.3659 2.05921 59.7547 3.55918C96.1435 5.05915 137.989 7.49994 197.973 2.50002' stroke='%23C8553D' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.noise-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.08;
+  pointer-events: none;
+ z-index: -9999;
+}
+
+.hand-input:focus {
+  outline: none;
+  border-bottom-color: #c8553d;
+  background-image: linear-gradient(to bottom, transparent 95%, rgba(200, 85, 61, 0.1) 95%);
+}
+
+.checkbox-wrapper input:checked + div {
+  background-color: #232323;
+  border-color: #232323;
+}
+
+.checkbox-wrapper input:checked + div::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid #eae7dc;
+  border-bottom: 2px solid #eae7dc;
+  transform: rotate(-45deg);
+  top: 3px;
+  left: 2px;
+}
+
+.float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+   0%, 100% { transform: translateY(0px) rotate(6deg); }
+            50% { transform: translateY(-10px) rotate(8deg); }
+}
