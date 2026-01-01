@@ -1,99 +1,44 @@
-/* eslint-disable no-undef */
-class LandingHeader {
-  elements = {
-    heroText1: () => cy.get("[data-test=hero-text-1]"),
-    heroText2: () => cy.get("[data-test=hero-text-2]"),
-    planTripButton: () => cy.get("[data-test=plan-trip-button]"),
-    images: () => cy.get("img"),
-  };
-
-  checkResponsiveDesign() {
-    const sizes = ["iphone-6", "ipad-2"];
-    sizes.forEach((size) => {
-      cy.viewport(size);
-      this.elements.heroText2().should("be.visible");
-      this.elements.planTripButton().should("be.visible");
-    });
-  }
-
-  checkPlanTripButton() {
-    this.elements
-      .planTripButton()
-      .should("be.visible")
-      .and("be.enabled")
-      .click();
-  }
-
-  checkHeroText2() {
-    this.elements
-      .heroText2()
-      .should("contain.text", "GET LOST")
-      .and("be.visible");
-  }
-
-  checkImagesLoad() {
-    this.elements.images().each((image) => {
-      cy.wrap(image)
-        .should("be.visible")
-        .and(($img) => {
-          expect($img[0].naturalWidth).to.be.greaterThan(0);
-        });
-    });
-  }
-
-  checkBackgroundText() {
-    this.elements
-      .heroText1()
-      .should("contain.text", "Are we there yet?")
-      .and("have.css", "pointer-events", "none");
-      this.elements.heroText2()
-        .should("contain.text", "No Signal. Good.")
-        .and("have.css", "pointer-events", "none");
-  }
-
-  attemptClickBackgroundText() {
-    this.elements
-      .heroText1()
-      .click({ force: true })
-      .should("have.css", "pointer-events", "none");
-    cy.contains("No Signal. Good.")
-      .click({ force: true })
-      .should("have.css", "pointer-events", "none");
-  }
-}
-
-class ManifestoSection {
+class HeroSection {
   constructor() {
-    this.manifestoTitle = "[data-test=manifesto-title]";
-    this.manifestoItem1 = "[data-test=manifesto-item-1]";
-    this.manifestoItem2 = "[data-test=manifesto-item-2]";
-    this.descriptiveText1 = ":nth-child(1) > .text-gray-600";
-    this.descriptiveText2 = ":nth-child(2) > .text-gray-600";
+    this.heroText = '[data-test=hero-text-2]';
+    this.coordinatesText = '.font-mono.text-xs.md\\:text-sm';
+    this.subText = '.font-hand.text-xl.md\\:text=3xl';
+    this.svgGraphic = 'svg[viewbox="0 0 100 50"]'
+      
   }
 
   visit() {
-    cy.visit("/");
+    cy.visit('http://localhost:5173/#');
   }
 
-  getManifestoTitle() {
-    return cy.get(this.manifestoTitle);
+  getHeroText() {
+    return cy.get(this.heroText)
   }
 
-  getManifestoItem1() {
-    return cy.get(this.manifestoItem1);
+  getCoordinatesText() {
+    return cy.get(this.coordinatesText)
   }
 
-  getManifestoItem2() {
-    return cy.get(this.manifestoItem2);
+  getSubText() {
+    return cy.get(this.subText)
   }
 
-  getDescriptiveText1() {
-    return cy.get(this.descriptiveText1);
+  getSvgGraphic() {
+    return cy.get(this.svgGraphic)
   }
 
-  getDescriptiveText2() {
-    return cy.get(this.descriptiveText2);
+  verifyHeroTextSize() {
+    this.getHeroText().should('have.css', 'font-size', '15vw');
+    this.getHeroText().should('have.css', 'font-size', '8rem')
   }
+
+  verifySubTextVisibility() {
+    this.getSubText().should('contain.text', '(but like, on purpose)')
+    this.getSvgGraphic().should('be.visible')
+  }
+
+  verifyTextStyles() { 
+    this.getHeroText().find('span').should('have.css', '-webkit-text-stroke', '2px rgba(35, 35, 35')
+  }
+
 }
-
-export {LandingHeader, ManifestoSection}

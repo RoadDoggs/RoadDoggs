@@ -1,4 +1,5 @@
 import React from 'react'
+import Filter from './components/Filter';
 
 const Dashboard = () => {
     const user = {
@@ -27,6 +28,7 @@ const Dashboard = () => {
                   </button>
               </div>
           </div>
+          <Filter />
      </main>
   )
 }

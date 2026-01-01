@@ -48,6 +48,7 @@ const Landing = () => {
             </span>
             <div className="absolute -right-8 md:-right-32 top-1/2 w-24 md:w-48 transform -translate-y-1/2">
               <svg
+                data-test='hero-svg'
                 viewBox="0 0 100 50"
                 className="w-full text-rust transform rotate-12"
               >
@@ -64,7 +65,7 @@ const Landing = () => {
                   strokeWidth="2"
                 />
               </svg>
-              <span className="font-hand text-xl md:text-3xl text-ink absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+              <span data-test='hero-text-3' className="font-hand text-xl md:text-3xl text-ink absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
                 (but like, on purpose)
               </span>
             </div>
